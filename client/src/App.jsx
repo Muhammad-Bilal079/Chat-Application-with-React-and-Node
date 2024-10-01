@@ -2,7 +2,9 @@ import React, { useState } from 'react'
 import io, { Socket } from 'socket.io-client'
 import Chat from './Chat'
 
-const socket = io.connect("http://localhost:3000")
+// const socket = io.connect("http://localhost:3000")
+
+const socket = io.connect("https://chat-application-with-react-and-node.vercel.app/")
 
 function App() {
   const [username, setUsername] = useState('')
