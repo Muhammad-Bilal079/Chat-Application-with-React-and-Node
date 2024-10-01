@@ -2,6 +2,8 @@ import express from 'express';
 import cors from 'cors';
 import { Server } from 'socket.io';
 import http from 'http';
+import path from 'path' 
+import { fileURLToPath } from 'url';
 
 // Express App Setup
 const app = express();
@@ -9,6 +11,15 @@ app.use(cors()); // CORS Setup
 
 // Create HTTP Server
 const server = http.createServer(app);
+
+const __filename = fileURLToPath(import.meta.url);
+const __dirname = path.dirname(__filename);
+
+
+app.get("/", (req, res) => {
+    app.use(express.static(path.resolve(__dirname, "client", "dist")));
+    res.sendFile(path.resolve(__dirname, "client", "dist", "index.html"));
+  });
 
 // Socket.io Server Setup
 const io = new Server(server, {
